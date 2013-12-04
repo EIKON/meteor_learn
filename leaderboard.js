@@ -4,6 +4,10 @@
 Players = new Meteor.Collection("players");
 
 if (Meteor.isClient) {
+  Meteor.startup(function() {
+    Session.set("sort_order", {score: -1, name: 1});
+  });
+
   Template.leaderboard.players = function () {
     return Players.find({}, {sort: {score: -1, name: 1}});
   };
