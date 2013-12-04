@@ -35,20 +35,26 @@ if (Meteor.isClient) {
       else {
         Session.set("sort_order", { score: -1, name: 1 }); // sort by score desc
       }
-    }
+    },
+
+  'click input.randomise': function() {
+    Players.find({}).forEach(function(player) {
+      Players.update(player, {$set: {score: randomScore()}});
+    });
+  }
 
 
   });
   
-  var randomScore = function() {
-    return Math.floor(Math.random()*10)*5;
-  }
-
   Template.player.events({
     'click': function () {
       Session.set("selected_player", this._id);
     }
   });
+}
+
+var randomScore = function() {
+  return Math.floor(Math.random()*10)*5;
 }
 
 // On server startup, create some players if the database is empty.
