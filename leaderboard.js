@@ -24,7 +24,20 @@ if (Meteor.isClient) {
   Template.leaderboard.events({
     'click input.inc': function () {
       Players.update(Session.get("selected_player"), {$inc: {score: 5}});
+    },
+
+   'click input.sort': function() {
+      var sortOrder = Session.get("sort_order");
+   
+      if (Object.keys(sortOrder)[0] == "score") { // sort by score desc
+        Session.set("sort_order", { name: 1, score: -1 }); // sort by name
+      }
+      else {
+        Session.set("sort_order", { score: -1, name: 1 }); // sort by score desc
+      }
     }
+
+
   });
 
   Template.player.events({
