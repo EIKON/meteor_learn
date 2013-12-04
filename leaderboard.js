@@ -9,7 +9,7 @@ if (Meteor.isClient) {
   });
 
   Template.leaderboard.players = function () {
-    return Players.find({}, {sort: {score: -1, name: 1}});
+    return Players.find({}, {sort: Session.get("sort_order")});
   };
 
   Template.leaderboard.selected_name = function () {
