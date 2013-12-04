@@ -39,6 +39,10 @@ if (Meteor.isClient) {
 
 
   });
+  
+  var randomScore = function() {
+    return Math.floor(Math.random()*10)*5;
+  }
 
   Template.player.events({
     'click': function () {
